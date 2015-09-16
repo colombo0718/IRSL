@@ -14,7 +14,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="jquery-ui/TechGreen.css">
-<script src="fieldLine.js"></script>
 <!-- <script src="three.min.js"></script> -->
 <body oncontextmenu="return false;" onselectstart="return false;">
 <script>
@@ -22,7 +21,7 @@
 	var camera, scene, renderer;
 	var windowX = window.innerWidth
 	   ,windowY = window.innerHeight;
-	var radius=30,thita=0,phai=-Math.PI/2;
+	var radius=25,thita=0,phai=-Math.PI/2;
 	// init(); to the end 
 	function init() {
 		camera = new THREE.PerspectiveCamera(40,windowX/windowY,5,10000);
@@ -46,69 +45,21 @@
 		arrow=LL.Arrow(zAxis.clone().negate(),zAxis.multiplyScalar(2),0xff00ff,2)
 		scene.add(arrow)
 
-var geometry = new THREE.CylinderGeometry( 10, 10, 8, 5 );
-var texture=THREE.ImageUtils.loadTexture("images/Beijing.jpg")
-var material = new THREE.MeshBasicMaterial( {color:0xffff00,opacity:0.2} );
-// material.visible = false;
-console.log(THREE.ImageUtils.loadTexture("images/Beijing.jpg"))
-var cylinder = new THREE.Mesh( geometry, material );
-scene.add( cylinder );
 
+		var geometry = new THREE.PlaneGeometry(10,10,2,2);
+		var texture=THREE.ImageUtils.loadTexture("images/TEC-example.jpg")
+		var material = new THREE.MeshBasicMaterial({opacity:0.2,transparent:false,side:THREE.DoubleSide/*,wireframe:true*/,map:texture} );
+		console.log(THREE.ImageUtils.loadTexture("images/TEC-example.jpg"))
+		var face=[]
+		face[1]= new THREE.Mesh( geometry, material );
+		face[1].position.set(0,0,10)
+		face[1].lookAt(face[1].position.clone().multiplyScalar(1))
+		scene.add(face[1]);
+		face[2]= new THREE.Mesh( geometry, material );
+		face[2].position.set(10,0,0)
+		face[2].lookAt(face[2].position.clone().multiplyScalar(2))
+		scene.add(face[2]);
 
-		geometry = new THREE.Geometry();
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(0*Math.PI*2/5), 4,10*Math.cos(0*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(1*Math.PI*2/5), 4,10*Math.cos(1*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(2*Math.PI*2/5), 4,10*Math.cos(2*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(3*Math.PI*2/5), 4,10*Math.cos(3*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(4*Math.PI*2/5), 4,10*Math.cos(4*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(5*Math.PI*2/5), 4,10*Math.cos(5*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(0*Math.PI*2/5),-4,10*Math.cos(0*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(1*Math.PI*2/5),-4,10*Math.cos(1*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(2*Math.PI*2/5),-4,10*Math.cos(2*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(3*Math.PI*2/5),-4,10*Math.cos(3*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(4*Math.PI*2/5),-4,10*Math.cos(4*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-		vertex=new THREE.Vector3().fromArray([10*Math.sin(5*Math.PI*2/5),-4,10*Math.cos(5*Math.PI*2/5)]);
-		geometry.vertices.push( vertex );
-
-		// vertex=new THREE.Vector3().fromArray([10,10,10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([10,10,10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([-10,10,10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([-10,-10,10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([10,-10,10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([10,10,10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([10,-10,10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([10,-10,-10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([-10,-10,-10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([-10,-10,10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([-10,10,10]);
-		// geometry.vertices.push( vertex );
-		// vertex=new THREE.Vector3().fromArray([-10,10,-10]);
-		// geometry.vertices.push( vertex );
-
-		material = new THREE.LineDashedMaterial( {color: 0x00ff00,gapSize:10} );
-		var cube = new THREE.Line( geometry, material );
-		scene.add( cube );
 
 
 
